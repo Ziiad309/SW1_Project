@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Payment method</title>
+  <link rel="stylesheet" href="../layout/css/style.css"> 
+</head>
+<body>
+  <form action='../php/payment.php' method="post">
+    <input type="radio" name="pay" value="credit" >
+    <label>Credit</label>
+    <input type="radio" name="pay" value="cash">
+    <label>Cash</label><br><br>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+</body>
+</html>

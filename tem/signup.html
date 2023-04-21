@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="../layout/css/style.css"> 
+</head>
+<body>
+  <form action = "../php/signup.php" method = "post" >
+    <h1>Sign Up</h1>
+
+    <label for="user-type">I am a:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="user-type" value="patient" checked> Patient</label>
+      <label><input type="radio" name="user-type" value="doctor"> Doctor</label>
+    </div>
+    
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" >
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" name="dob" id="dob" >
+    
+    <label>Gender:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="gender" value="male"> Male</label>
+      <label><input type="radio" name="gender" value="female"> Female</label>
+    </div>
+    
+    <label for="phone">Phone:</label>
+    <input type="tel" name="phone" id="phone" >
+    
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" >
+    
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" >
+    
+    
+    <label for="qualifications" class="hidden">Qualifications:</label>
+    <input type="text" name="qualifications" id="qualifications" class="hidden doctor-only">
+   
+    
+    <input type="submit" name="submit" value="Sign Up">
+  </form>
+</body>
+</html>
