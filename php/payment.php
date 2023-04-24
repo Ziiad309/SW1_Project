@@ -1,5 +1,5 @@
     <?php
-
+session_start();
 require_once ("../inc/db connection.php");
 
 if(isset($_POST['submit'])) {
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
     echo "<form method='post'>
           <label>Amount:</label>
           <input type='text' name='amount' readonly><br><br> 
-          <input type='submit' name='cash_submit' value='Submit Cash Payment'>
+          <input type='submit' name='cash_submit' value='I Agree'>
           </form>";
   }
 }
@@ -34,7 +34,12 @@ if(isset($_POST['credit_submit'])) {
   $cvc = strlen($_POST['cvc']) == 3 ? $_POST['cvc'] : '';
   $date = date('Y-m-d H:i:s');
   $expiration_date = $_POST['expiration_date'];
+  $valid_date = strtotime($expiration_date);
+  $current_date = time();
   $hashed_password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
+    if ($current_date > $valid_date){
+      echo "the expiration date is not valid" ;
+    } else {
 
     $sql_payment = "INSERT INTO `payment`(`payment_method`, `date`, `amount`, `credit_id`, `cvc`, `valid_date`, `password`, `fee`) VALUES
     ('Credit' , '$date' , null , '$credit_card_number' , '$cvc' , '$expiration_date' , '$hashed_password' , null )";
@@ -44,8 +49,8 @@ if(isset($_POST['credit_submit'])) {
 
     echo "<script>alert('You have paid with credit successfully.')</script>";
 
-  }
-
+      }
+   }
 }
 
 if(isset($_POST['cash_submit'])) {
@@ -59,7 +64,8 @@ if(isset($_POST['cash_submit'])) {
   if(mysqli_query($connection, $sql_payment)){
 
     echo "<script>alert('You will pay in the clinic.')</script>";
-
+    // we will select amount from db 
+    $_SESSION['amount'] ;
   }
 
 }
