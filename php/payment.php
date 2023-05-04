@@ -30,13 +30,13 @@ if(isset($_POST['submit'])) {
 if(isset($_POST['credit_submit'])) {
 
   
-  $credit_card_number = $_POST['credit_card_number'];
-  $cvc = strlen($_POST['cvc']) == 3 ? $_POST['cvc'] : '';
+  $credit_card_number = (string)$_POST['credit_card_number'];
+  $cvc = $_POST['cvc']? (string)$_POST['cvc'] : '';
   $date = date('Y-m-d H:i:s');
   $expiration_date = $_POST['expiration_date'];
   $valid_date = strtotime($expiration_date);
   $current_date = time();
-  $hashed_password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
+  $hashed_password = password_hash(trim($_POST['password']), PASSWORD_BCRYPT);
     if ($current_date > $valid_date){
       echo "the expiration date is not valid" ;
     } else {
@@ -69,6 +69,6 @@ if(isset($_POST['cash_submit'])) {
   }
 
 }
-
+$connection->close();
 
 ?>
