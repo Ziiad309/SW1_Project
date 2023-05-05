@@ -15,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
                 $_SESSION['name'] = $row['name'];
-                echo "<script>alert('Successful login, Nice to see you again Mr. {$_SESSION['name']} :)' )</script>";
+                echo "<script>alert('Successful login, Nice to see you again Mr/Mrs. {$_SESSION['name']} :)' )</script>";
+                header("Location: home.html");
+                exit();
             } else {
                 echo "<script>alert('Invalid username or password')</script>";
             }
