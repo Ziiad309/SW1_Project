@@ -8,15 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $usertype = $_POST['user-type'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $sql = "SELECT email, password, name FROM $usertype WHERE email = '$email'";
+        $sql = "SELECT * FROM $usertype WHERE email = '$email'";
         $result = $connection->query($sql);
 
         if ($result->num_rows != 0) {
             $row = $result->fetch_assoc();
             if (password_verify($password, $row['password'])) {
                 $_SESSION['name'] = $row['name'];
+                $_SESSION['user_id'] =$row['patient_id'];
                 echo "<script>alert('Successful login, Nice to see you again Mr/Mrs. {$_SESSION['name']} :)' )</script>";
-                header("Location: home.html");
+                header("Location: rate.php");
                 exit();
             } else {
                 echo "<script>alert('Invalid username or password')</script>";

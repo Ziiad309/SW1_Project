@@ -29,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "<script>alert('Successful Sign up.')</script>";
                     $id_sql = "SELECT patient_id FROM `patient` WHERE email='$email'";
                     $result = $connection->query($id_sql);
-
+                    
                     if ($row = $result->fetch_assoc()) {
                         $_SESSION['user_id'] = $row['patient_id'];
                         $_SESSION['name'] = $name;
                         $_SESSION['user-type'] = $usertype;
-                        header("Location: logout.php");
+                        header("Location: setlocation.php");
                         exit();
                     }
                 }
@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if ($row = $result->fetch_assoc()) {
                         $_SESSION['user_id'] = $row['doctor_id'];
                         $_SESSION['name'] = $name;
-                        header("Location: logout.php");
                         exit();
                     }
                 }
